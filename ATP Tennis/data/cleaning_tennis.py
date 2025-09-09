@@ -34,4 +34,11 @@ merged_ages["Losses"] = merged_ages["Losses"].astype(int)
 
 #relevant_df = pd.concat([win_count, loss_count], axis=1).fillna(0).astype(int)
 #print(relevant_df)
-#print(merged_ages)
+print(merged_ages)
+
+cut_df = merged_ages[merged_ages["Matches Played"] > 2]
+
+age_bins = [16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38]
+cut_df["Age group (2 Years)"] = pd.cut(cut_df["Age"], bins = age_bins)
+
+print(cut_df.groupby("Age group (2 Years)")["Win Rate"].mean())
